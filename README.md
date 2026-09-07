@@ -1,30 +1,46 @@
 ﻿# Stats Sprint
 
-Interactive revision site for **Business Statistics for Entrepreneurs** (IIM Bangalore).
+Interactive revision site for **Business Statistics for Entrepreneurs** (IIM Bangalore),
+covering both Business Statistics 1 and Business Statistics 2.
 
-The four course modules condensed into notes, then 90 real past-paper questions from
-the February, March and May 2026 papers — every answer recomputed from scratch rather
-than copied from the answer key, and shown with its working.
+Condensed notes, then 90 real past-paper questions from the February, March and May
+2026 papers — every answer recomputed from scratch rather than copied from the answer
+key, and shown with its working.
 
-## What is in it
+## Business Statistics 1
 
-- **Four course modules** — descriptive statistics, probability, random variables and
-  discrete distributions, continuous distributions. Formulas are badged
-  GIVEN / DERIVED / NOT GIVEN so you know what has to be memorised.
-- **A separate Statistics II section** — sampling and confidence intervals, hypothesis
-  testing. Not part of the four-module syllabus; it covers the May 2026 paper, whose
-  header reads *Business Statistics for Entrepreneurs II*.
-- **90 verified past-paper questions** with worked solutions and an answer-band strip
-  showing where the computed value falls among the exam's interval options.
+Papers of 1 February and 29 March 2026, 70 questions across four modules:
+
+1. **Descriptive Statistics** — data types and scales, charts, centre, position,
+   spread, z-scores and outliers
+2. **Probability** — addition and multiplication laws, conditional probability,
+   independence, two-way tables, Bayes
+3. **Random Variables & Discrete Distributions** — probability tables, expectation and
+   variance, linear combinations, Bernoulli, Binomial, Poisson
+4. **Continuous Distributions** — Uniform, Exponential, Normal, normal approximation
+
+## Business Statistics 2
+
+Paper of 24 May 2026, 20 questions, with its own module numbering:
+
+1. **Sampling & Confidence Intervals** — standard error, t-intervals, proportion and
+   variance intervals
+2. **Hypothesis Testing** — H0 vs Ha, test statistics, critical values, p-values
+
+## Features
+
+- Formulas badged GIVEN / DERIVED / NOT GIVEN so you know what has to be memorised
+- 90 verified questions with worked solutions and an answer-band strip showing where
+  the computed value falls among the exam's interval options
 - **Mock exam** — 35 mixed questions, 60-minute timer, question palette and flagging,
-  graded review that names your weakest topics.
+  graded review that names your weakest topics
 - **Model-picker drill** — real question stems with the arithmetic stripped out; name
-  the distribution the wording calls for.
-- **37 formula flashcards** — anything you flag comes back until it sticks.
+  the distribution the wording calls for
+- **37 formula flashcards** — anything you flag comes back until it sticks
 - **Calculators** — binomial, Poisson (with rate conversion), normal, exponential,
-  uniform, and descriptive statistics from pasted data.
-- **Reference tables** — full formula sheet, Z table, t and chi-square critical values.
-- Progress saved in the browser, light and dark themes, search across everything.
+  uniform, and descriptive statistics from pasted data
+- **Reference tables** — full formula sheet, Z table, t and chi-square critical values
+- Progress saved in the browser, light and dark themes, search across everything
 
 ## A note on one answer
 
