@@ -3,13 +3,13 @@
 Interactive revision site for **Business Statistics for Entrepreneurs** (IIM Bangalore),
 covering both Business Statistics 1 and Business Statistics 2.
 
-Condensed notes, then 90 real past-paper questions from the February, March and May
-2026 papers — every answer recomputed from scratch rather than copied from the answer
-key, and shown with its working.
+Condensed notes across all eight modules, then 90 real past-paper questions from the
+February, March and May 2026 papers — every answer recomputed from scratch rather than
+copied from the answer key, and shown with its working.
 
 ## Business Statistics 1
 
-Papers of 1 February and 29 March 2026, 70 questions across four modules:
+Papers of 1 February and 29 March 2026, 70 questions:
 
 1. **Descriptive Statistics** — data types and scales, charts, centre, position,
    spread, z-scores and outliers
@@ -21,11 +21,18 @@ Papers of 1 February and 29 March 2026, 70 questions across four modules:
 
 ## Business Statistics 2
 
-Paper of 24 May 2026, 20 questions, with its own module numbering:
+Paper of 24 May 2026, 20 questions:
 
-1. **Sampling & Confidence Intervals** — standard error, t-intervals, proportion and
-   variance intervals
-2. **Hypothesis Testing** — H0 vs Ha, test statistics, critical values, p-values
+1. **Distributions Related to Normal** — linear combinations of normals, correlated
+   combinations, inverse normal, chi-square, Student's t, F, reading the tables
+2. **Sampling & Sampling Distributions** — the sampling process, probabilistic and
+   non-probabilistic methods, point estimation, standard error, the Central Limit
+   Theorem, sampling distribution of a proportion, distribution of the sample variance
+3. **Confidence Intervals & Estimation** — properties of a point estimator, sampling
+   vs non-sampling error, intervals for a mean, a proportion and a variance, sample
+   size estimation
+4. **Hypothesis Testing** — H0 and Ha, Type 1 and Type 2 errors, the p-value approach,
+   tests for mean, proportion and variance, covariance and correlation
 
 ## Features
 
@@ -33,10 +40,10 @@ Paper of 24 May 2026, 20 questions, with its own module numbering:
 - 90 verified questions with worked solutions and an answer-band strip showing where
   the computed value falls among the exam's interval options
 - **Mock exam** — 35 mixed questions, 60-minute timer, question palette and flagging,
-  graded review that names your weakest topics
+  graded review that names your weakest topics. Whole papers can also be sat individually
 - **Model-picker drill** — real question stems with the arithmetic stripped out; name
   the distribution the wording calls for
-- **37 formula flashcards** — anything you flag comes back until it sticks
+- **57 formula flashcards** — anything you flag comes back until it sticks
 - **Calculators** — binomial, Poisson (with rate conversion), normal, exponential,
   uniform, and descriptive statistics from pasted data
 - **Reference tables** — full formula sheet, Z table, t and chi-square critical values
