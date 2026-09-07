@@ -973,7 +973,14 @@ function reveal(qid, choice, silent) {
 }
 
 /* ---------------- mock exam ---------------- */
-var EX = null, exTimer = null;
+var EX = null, exTimer = null, advT = null;
+function cancelAdvance() { if (advT) { clearTimeout(advT); advT = null; } }
+function gotoQ(i) {
+  cancelAdvance();
+  if (!EX || EX.done) return;
+  EX.cur = Math.max(0, Math.min(i, EX.qs.length - 1));
+  renderExam();
+}
 function startExam(scope) {
   var pool = scope === "all" ? QS.slice() : QS.filter(function (q) { return q.pid === scope; });
   var picked;
@@ -982,6 +989,7 @@ function startExam(scope) {
   } else {
     picked = pool.slice().sort(function (a, b) { return a.num - b.num; });
   }
+  cancelAdvance();
   EX = { qs: picked, cur: 0, ans: {}, marks: {}, left: picked.length <= 20 ? 60 * 60 : 60 * 60, done: false, scope: scope };
   go("exam"); renderExam(); tick();
   exTimer = setInterval(tick, 1000);
@@ -997,7 +1005,10 @@ function tick() {
   EX.left--;
 }
 function renderExam() {
+  if (!EX || EX.done) return;
+  EX.cur = Math.max(0, Math.min(EX.cur, EX.qs.length - 1));
   var q = EX.qs[EX.cur], n = EX.qs.length;
+  if (!q) return;
   $("examCount").textContent = "Question " + (EX.cur + 1) + " of " + n;
   $("examProg").style.width = (Object.keys(EX.ans).length / n * 100) + "%";
   var h = '<div class="qcard"><div class="qtop">' +
@@ -1012,9 +1023,17 @@ function renderExam() {
   $("examQ").innerHTML = h;
   [].forEach.call($("examQ").querySelectorAll(".opt"), function (b) {
     b.onclick = function () {
+      if (!EX || EX.done) return;
       EX.ans[q.qid] = +b.dataset.c;
+      cancelAdvance();
       renderExam(); renderPalette();
-      if (EX.cur < n - 1) setTimeout(function () { EX.cur++; renderExam(); renderPalette(); }, 130);
+      if (EX.cur < n - 1) {
+        advT = setTimeout(function () {
+          advT = null;
+          if (!EX || EX.done) return;
+          if (EX.cur < EX.qs.length - 1) { EX.cur++; renderExam(); renderPalette(); }
+        }, 130);
+      }
     };
   });
   $("exPrev").disabled = EX.cur === 0;
@@ -1033,12 +1052,12 @@ function renderPalette() {
   });
   $("palette").innerHTML = h;
   [].forEach.call($("palette").querySelectorAll(".pcell"), function (b) {
-    b.onclick = function () { EX.cur = +b.dataset.i; renderExam(); };
+    b.onclick = function () { gotoQ(+b.dataset.i); };
   });
 }
 function submitExam() {
   if (!EX || EX.done) return;
-  EX.done = true; clearInterval(exTimer);
+  EX.done = true; clearInterval(exTimer); cancelAdvance();
   var right = 0, wrong = 0, skipped = 0;
   EX.qs.forEach(function (q) {
     if (EX.ans[q.qid] === undefined) skipped++;
@@ -1449,7 +1468,7 @@ function go(v) {
   if (v === "calc") renderCalc();
   if (v === "ref") renderRef();
   if (v === "search") setTimeout(function () { $("sInput").focus(); }, 40);
-  if (v !== "exam" && exTimer) { clearInterval(exTimer); exTimer = null; }
+  if (v !== "exam") { cancelAdvance(); if (exTimer) { clearInterval(exTimer); exTimer = null; } }
   closeMenu();
   window.scrollTo(0, 0);
 }
@@ -1507,9 +1526,11 @@ function init() {
     try { localStorage.setItem("bstat-theme", next); } catch (e) {}
   };
 
-  $("exPrev").onclick = function () { if (EX.cur > 0) { EX.cur--; renderExam(); } };
-  $("exNext").onclick = function () { if (EX.cur < EX.qs.length - 1) { EX.cur++; renderExam(); } };
+  $("exPrev").onclick = function () { if (EX) gotoQ(EX.cur - 1); };
+  $("exNext").onclick = function () { if (EX) gotoQ(EX.cur + 1); };
   $("exMark").onclick = function () {
+    if (!EX || EX.done) return;
+    cancelAdvance();
     var q = EX.qs[EX.cur]; EX.marks[q.qid] = !EX.marks[q.qid]; renderExam();
   };
   $("exSubmit").onclick = function () {
@@ -1517,7 +1538,7 @@ function init() {
     if (un > 0 && !confirm(un + " question" + (un > 1 ? "s are" : " is") + " unanswered. Submit anyway?")) return;
     submitExam();
   };
-  $("exQuit").onclick = function () { if (confirm("Leave the exam? This attempt is discarded.")) { EX = null; go("home"); } };
+  $("exQuit").onclick = function () { if (confirm("Leave the exam? This attempt is discarded.")) { cancelAdvance(); EX = null; go("home"); } };
   $("exAgain").onclick = function () { startExam(EX ? EX.scope : "all"); };
   $("exBack").onclick = function () { go("home"); };
 
@@ -1535,8 +1556,8 @@ function init() {
       return;
     }
     if (S.view === "exam" && EX) {
-      if (e.key === "ArrowRight") { if (EX.cur < EX.qs.length - 1) { EX.cur++; renderExam(); } }
-      if (e.key === "ArrowLeft") { if (EX.cur > 0) { EX.cur--; renderExam(); } }
+      if (e.key === "ArrowRight") gotoQ(EX.cur + 1);
+      if (e.key === "ArrowLeft") gotoQ(EX.cur - 1);
       if ("1234".indexOf(e.key) >= 0) {
         var btn = $("examQ").querySelectorAll(".opt")[+e.key - 1];
         if (btn) btn.click();
